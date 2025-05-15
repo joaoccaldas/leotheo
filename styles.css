@@ -1,205 +1,445 @@
-/* styles.css - Full scrollable layout with Caldas mode and normal mode */
+/* styles.css - Lulu's Library Theming and Component Styles */
 
+/* :root variables and body.caldas-mode variables as provided by the user */
 :root {
-  --font-primary: 'Inter', sans-serif;
-  --font-caldas: 'Press Start 2P', cursive;
-  --bg-primary: #f3f4f6;
-  --bg-card: #ffffff;
-  --bg-input: #ffffff;
-  --bg-page: #ffffff;
-  --bg-reader-overlay: transparent;
-  --text-primary: #1f2937;
-  --text-secondary: #4b5563;
-  --text-accent: #4f46e5;
-  --text-input: #1f2937;
-  --text-page: #1f2937;
-  --border-input: #d1d5db;
-  --border-page-separator: #e0e0e0;
-  --accent-color: #4f46e5;
-  --accent-color-hover: #4338ca;
-  --accent-foreground: #ffffff;
-  --muted-bg: #e5e7eb;
-  --muted-text: #374151;
-  --muted-hover-bg: #d1d5db;
-  --button-add-bg: var(--accent-color);
-  --button-add-text: var(--accent-foreground);
-  --button-add-hover-bg: var(--accent-color-hover);
-  --button-close-book-text: #ffffff;
-  --button-close-book-hover-text: #e5e7eb;
-  --theme-toggle-bg: var(--muted-bg);
-  --theme-toggle-text-color: var(--muted-text);
-  --theme-toggle-focus-ring: var(--accent-color);
-  --book-cover-overlay-start: rgba(0,0,0,0.6);
-  --book-cover-overlay-end: rgba(0,0,0,0.0);
-  --book-cover-text-shadow: 0px 2px 4px rgba(0,0,0,0.8);
+    --font-primary: 'Inter', sans-serif;
+    --font-caldas: 'Press Start 2P', cursive;
+    --bg-primary: #f3f4f6;
+    --bg-card: #ffffff;
+    --bg-input: #ffffff;
+    --bg-page: #ffffff;
+    --bg-reader-overlay: rgba(55, 65, 81, 0.5);
+    --text-primary: #1f2937;
+    --text-secondary: #4b5563;
+    --text-accent: #4f46e5;
+    --text-input: #1f2937;
+    --text-page: #1f2937;
+    --text-placeholder: #9ca3af; /* Added for consistency */
+    --border-input: #d1d5db;
+    --border-page-separator: #e0e0e0;
+    --accent-color: #4f46e5;
+    --accent-color-hover: #4338ca;
+    --accent-foreground: #ffffff;
+    --muted-bg: #e5e7eb;
+    --muted-text: #374151;
+    --muted-hover-bg: #d1d5db;
+    --button-add-bg: var(--accent-color);
+    --button-add-text: var(--accent-foreground);
+    --button-add-hover-bg: var(--accent-color-hover);
+    --button-close-book-text: #ffffff;
+    --button-close-book-hover-text: #e5e7eb;
+    --theme-toggle-bg: var(--muted-bg);
+    --theme-toggle-text-color: var(--muted-text);
+    --theme-toggle-focus-ring: var(--accent-color);
+    --username-font-size: 2.25rem;
+    --change-username-font-size: 1rem;
+    --book-cover-overlay-start: rgba(0,0,0,0.6);
+    --book-cover-overlay-end: rgba(0,0,0,0.0);
+    --book-cover-text-shadow: 0px 2px 4px rgba(0,0,0,0.8);
+    --page-title-font: var(--font-primary);
+    --modal-title-font: var(--font-primary);
+    --custom-welcome-font: var(--font-primary);
+    --custom-welcome-font-size: 1.5rem;
+    --custom-welcome-text-color: var(--text-secondary);
+
+    /* Added for better control over modal specific font sizes if needed */
+    --modal-label-font-size: 0.875rem; /* Equivalent to Tailwind's text-sm */
+    --modal-input-font-size: 0.95rem;  /* Slightly larger for inputs */
 }
 
 body.caldas-mode {
-  --bg-primary: #1a1a2e;
-  --bg-card: #2a2a3e;
-  --bg-input: #1e1e30;
-  --bg-page: #242436;
-  --bg-reader-overlay: rgba(10, 10, 20, 0.7);
-  --text-primary: #e0e0e0;
-  --text-secondary: #a0a0c0;
-  --text-accent: #00ffdd;
-  --text-input: #e0e0e0;
-  --text-page: #e0e0e0;
-  --border-input: #4a4a6e;
-  --border-page-separator: #3a3a5e;
-  --accent-color: #00ffdd;
-  --accent-color-hover: #00e0c0;
-  --accent-foreground: #1a1a2e;
-  --muted-bg: #3a3a5e;
-  --muted-text: #c0c0e0;
-  --muted-hover-bg: #4a4a6e;
-  --button-add-bg: #ff00ff;
-  --button-add-text: #ffffff;
-  --button-add-hover-bg: #dd00dd;
-  --button-close-book-text: #00ffdd;
-  --button-close-book-hover-text: #ffffff;
-  --theme-toggle-bg: var(--accent-color);
-  --theme-toggle-text-color: var(--accent-foreground);
-  --theme-toggle-focus-ring: #ff00ff;
-  --book-cover-overlay-start: rgba(255,0,255,0.4);
-  --book-cover-overlay-end: rgba(0,255,221,0.1);
-  --book-cover-text-shadow: 0px 0px 8px var(--accent-color);
+    --font-primary: 'Inter', sans-serif;
+    --font-caldas: 'Press Start 2P', cursive;
+    --bg-primary: #1a1a2e;
+    --bg-card: #2a2a3e;
+    --bg-input: #1e1e30;
+    --bg-page: #242436;
+    --bg-reader-overlay: rgba(10, 10, 20, 0.7);
+    --text-primary: #e0e0e0;
+    --text-secondary: #a0a0c0;
+    --text-accent: #00ffdd;
+    --text-input: #e0e0e0;
+    --text-page: #e0e0e0;
+    --text-placeholder: #707090; /* Added for consistency */
+    --border-input: #4a4a6e;
+    --border-page-separator: #3a3a5e;
+    --accent-color: #00ffdd;
+    --accent-color-hover: #00e0c0;
+    --accent-foreground: #1a1a2e;
+    --muted-bg: #3a3a5e;
+    --muted-text: #c0c0e0;
+    --muted-hover-bg: #4a4a6e;
+    --button-add-bg: #ff00ff;
+    --button-add-text: #ffffff;
+    --button-add-hover-bg: #dd00dd;
+    --button-close-book-text: #00ffdd;
+    --button-close-book-hover-text: #ffffff;
+    --theme-toggle-bg: var(--accent-color);
+    --theme-toggle-text-color: var(--accent-foreground);
+    --theme-toggle-focus-ring: #ff00ff;
+    --book-cover-overlay-start: rgba(255,0,255,0.4);
+    --book-cover-overlay-end: rgba(0,255,221,0.1);
+    --book-cover-text-shadow: 0px 0px 8px var(--accent-color);
+    --page-title-font: var(--font-caldas);
+    --modal-title-font: var(--font-caldas);
+    --custom-welcome-font: var(--font-caldas);
+    --custom-welcome-font-size: 1.25rem;
+    --custom-welcome-text-color: var(--text-accent);
+
+    /* Overriding modal specific font sizes for better visibility in Caldas mode if needed */
+    --modal-label-font-size: 0.9rem;
+    --modal-input-font-size: 1rem;
 }
 
+/* Base body styles */
 body {
-  font-family: var(--font-primary);
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
-  transition: background-color 0.3s ease, color 0.3s ease;
-  margin: 0;
+    font-family: var(--font-primary);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    overscroll-behavior: none; /* Prevent pull-to-refresh, etc. */
+    transition: background-color 0.3s ease, color 0.3s ease;
+    margin: 0;
+    font-size: 16px; /* Base for rem units */
+    line-height: 1.6;
 }
 
+/* Utility classes based on user's list - these will apply the CSS variables */
+.username-display-text { font-size: var(--username-font-size); color: var(--text-accent); font-weight: 500; }
+.change-username-link { font-size: var(--change-username-font-size); color: var(--text-accent); text-decoration: underline; cursor: pointer; }
+.change-username-link:hover { filter: brightness(1.2); }
+
+.custom-welcome-text {
+    font-family: var(--custom-welcome-font);
+    font-size: var(--custom-welcome-font-size);
+    color: var(--custom-welcome-text-color);
+    font-weight: 500; /* Assuming medium weight */
+    transition: font-family 0.3s ease, color 0.3s ease, font-size 0.3s ease;
+}
+.page-title-text {
+    font-family: var(--page-title-font);
+    color: var(--text-primary); /* Uses primary text color by default */
+    transition: font-family 0.3s ease;
+}
+.modal-title-text { /* Assumed for modal titles if a specific class is used */
+    font-family: var(--modal-title-font);
+    color: var(--text-primary); /* Uses primary text color by default */
+    transition: font-family 0.3s ease;
+}
+
+/* Backgrounds and Text Colors */
+.bg-card { background-color: var(--bg-card); }
+.text-text-primary { color: var(--text-primary); }
+.text-text-secondary { color: var(--text-secondary); }
+.bg-input { background-color: var(--bg-input); }
+.text-input-text { color: var(--text-input); } /* For text typed into inputs */
+.page-bg { background-color: var(--bg-page); }
+.page-text { color: var(--text-page); }
+.bg-reader-overlay { background-color: var(--bg-reader-overlay); }
+
+/* Borders */
+.input-border { border: 1px solid var(--border-input); } /* Apply to input elements */
+
+/* Accents & Buttons */
+.text-accent { color: var(--text-accent); }
+.hover\:text-accent-hover:hover { filter: brightness(1.2); } /* Assuming this is for text links */
+.bg-accent { background-color: var(--accent-color); }
+.text-accent-foreground { color: var(--accent-foreground); }
+.hover\:bg-accent-hover:hover { background-color: var(--accent-color-hover); }
+
+/* Muted Styles */
+.bg-muted { background-color: var(--muted-bg); }
+.text-muted-foreground { color: var(--muted-text); } /* Assuming this means text on muted backgrounds */
+.text-muted-text { color: var(--muted-text); } /* If it's just muted colored text */
+.hover\:bg-muted-hover:hover { background-color: var(--muted-hover-bg); }
+
+/* Specific Button Styles (if not solely handled by Tailwind classes in HTML) */
+.add-book-button-style { /* For the floating action button */
+    background-color: var(--button-add-bg);
+    color: var(--button-add-text);
+    font-family: var(--font-caldas); /* As per user var */
+}
+.add-book-button-style:hover { background-color: var(--button-add-hover-bg); }
+
+.close-book-button-style { /* For the 'X' in reader */
+    color: var(--button-close-book-text);
+    font-family: var(--font-caldas); /* As per user var, might be large */
+}
+.close-book-button-style:hover { color: var(--button-close-book-hover-text); }
+
+.theme-text { color: var(--text-secondary); } /* For "Theme:" label */
+.theme-toggle-button { /* For the theme toggle button itself */
+    background-color: var(--theme-toggle-bg);
+    color: var(--theme-toggle-text-color);
+    font-family: var(--font-primary); /* Primary font for button text */
+}
+.theme-toggle-button:focus {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 2px var(--theme-toggle-focus-ring); /* Simulating Tailwind ring */
+}
+
+/* Focus Ring (applied by Tailwind utilities, but variable can be used if custom focus styles are added) */
+.focus\:ring-accent:focus {
+    /* This assumes Tailwind is generating the ring. If using pure CSS rings: */
+    /* box-shadow: 0 0 0 3px var(--accent-color); opacity: 0.5; */
+    /* For Tailwind, it usually sets --tw-ring-color, let's use that pattern */
+     --tw-ring-opacity: 1;
+     box-shadow: 0 0 0 3px var(--accent-color); /* Simplified for example */
+}
+.focus\:border-accent:focus { border-color: var(--accent-color); }
+
+
+/* Modal Styles */
+.modal-overlay { background-color: rgba(0, 0, 0, 0.6); } /* If a separate overlay div is used */
+
+/* Styles specifically for the "Add Book" Modal for visibility */
+#book-creation-modal label {
+  font-size: var(--modal-label-font-size);
+  color: var(--text-secondary); /* Uses variable for themed label color */
+  /* Tailwind `font-medium` typically applied in HTML */
+}
+
+#book-creation-modal input[type="text"],
+#book-creation-modal input[type="url"],
+#book-creation-modal input[type="number"] {
+  background-color: var(--bg-input);
+  color: var(--text-input);
+  border: 1px solid var(--border-input);
+  font-size: var(--modal-input-font-size);
+  padding: 0.65rem 0.75rem; /* Ensure decent padding for visibility */
+  border-radius: 0.375rem; /* md */
+}
+
+#page-content-inputs textarea { /* For Step 2 page editor textarea */
+  font-family: var(--font-primary);
+  font-size: 15px; /* User specific */
+  line-height: 1.6; /* User specific */
+  background-color: var(--bg-input);
+  color: var(--text-input);
+  border: 1px solid var(--border-input);
+  padding: 0.65rem 0.75rem;
+  border-radius: 0.375rem; /* md */
+}
+
+#book-creation-modal input::placeholder,
+#page-content-inputs textarea::placeholder {
+  color: var(--text-placeholder);
+  opacity: 1;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar { width: 8px; height: 8px; } /* User specific */
+::-webkit-scrollbar-track { background: var(--muted-bg); border-radius: 10px; } /* User specific */
+::-webkit-scrollbar-thumb { background: var(--text-secondary); border-radius: 10px; } /* User specific */
+::-webkit-scrollbar-thumb:hover { filter: brightness(1.2); } /* User specific */
+
+
+/* Book reader styles */
 .book {
-  width: 90vw;
-  max-width: 1200px;
-  height: 700px;
-  margin: auto;
-  display: flex;
-  perspective: 2500px;
-  border: 1px solid var(--border-page-separator);
-  overflow: hidden;
+    width: 90vw;
+    height: 700px; /* User specific */
+    max-width: 1200px; /* User specific */
+    display: flex;
+    perspective: 2500px; /* User specific */
+    transition: opacity 0.5s ease-in-out; /* User specific */
+    margin: auto; /* User specific */
+    border: 1px solid var(--border-page-separator); /* User specific */
+    overflow: hidden; /* User specific */
+    border-radius: 0.25rem; /* Added for slight rounding */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1); /* Softer shadow */
 }
 
 .page {
-  flex-shrink: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  background-color: var(--bg-page);
-  transition: transform 0.6s ease, opacity 0.3s ease;
-  overflow-y: auto;
-  height: 100%;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05); /* User specific */
+    overflow-y: auto; /* User specific - content scrolls, page itself not unless needed */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    /* align-items: center; User specific - this centers content horizontally, might not be desired for all page text */
+    line-height: 1.7; /* User specific */
+    height: 100%;
+    transition: width 0.6s ease-in-out, opacity 0.3s ease-in-out, transform 0.6s ease-in-out; /* User specific */
+    flex-shrink: 0; /* User specific */
+    background-size: cover; /* User specific */
+    background-position: center; /* User specific */
+    background-repeat: no-repeat; /* User specific */
+    background-color: var(--bg-page); /* Ensures page bg color if no image */
 }
 
 .page.half-width-page {
-  width: 50%;
-  padding: 1rem;
-  border-right: 1px solid var(--border-page-separator);
-  line-height: 1.5;
-  font-size: 0.8rem;
-  overflow-y: auto;
+    width: 50%;
+    opacity: 1;
+    /* border-right: 1px solid var(--border-page-separator); User specific (see .left) */
+    padding: 2rem; /* User specific - for content pages */
+}
+.page.left.half-width-page { border-right: 1px solid var(--border-page-separator); } /* User specific */
+.page.right.half-width-page { border-left: none; } /* User specific */
+
+.page.full-width-page { /* For cover display */
+    width: 100%;
+    opacity: 1;
+    border-right: none; /* User specific */
+    background-size: cover !important; /* User specific - important might be needed if inline styles compete */
+    background-position: center !important; /* User specific */
+    padding: 0; /* User specific - No padding on page element for full-width cover */
 }
 
-.page.right.half-width-page {
-  border-right: none;
+/* Ensure the .page-content (cover text container) within a full-width page has padding & centering */
+.page.full-width-page .page-content.cover-text-on-image-container {
+    margin: auto; /* User specific - Center the text box */
 }
 
-.page.full-width-page {
-  width: 100%;
-  padding: 0;
-  border: none;
-  overflow-y: auto;
+.page.hidden-page {
+    width: 0;
+    opacity: 0;
+    padding: 0;
+    border: none;
+    overflow: hidden;
 }
 
-.page-content {
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  font-size: 0.75rem;
-  line-height: 1.4;
-  color: var(--text-page);
-  overflow-y: auto;
-  padding-right: 0.5rem;
+.page-content { /* General container for text within a page */
+    max-width: 100%;
+    width: 100%;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    font-size: 16px; /* User specific - base content font size */
+    color: var(--text-page); /* Ensure page text color is applied */
+    /* Padding for normal content pages is handled by .page.half-width-page */
+    /* Padding for cover text is handled by .cover-text-on-image-container */
 }
+/* .page.half-width-page .page-content {
+    No specific padding here, inherits from .page.half-width-page's padding
+} */
 
-.cover-text-on-image-container {
-  position: relative;
-  margin: auto;
-  padding: 1.5rem;
-  max-width: 80%;
-  max-height: 80%;
-  background-color: rgba(0,0,0,0.6);
-  color: #fff;
-  border-radius: 0.375rem;
-  text-align: center;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+.cover-text-on-image-container { /* Styles for the text box overlaying a cover image */
+    background-color: rgba(0,0,0,0.55); /* User specific */
+    color: white !important; /* User specific */
+    padding: 1.5rem; /* User specific */
+    border-radius: 0.375rem; /* User specific */
+    width: auto; /* User specific - Adjusts to content */
+    max-width: 60%; /* User specific - Narrows the text box */
+    margin: auto; /* User specific - Centers it */
+    text-align: center; /* User specific */
+    overflow-y: auto; /* User specific */
+    max-height: 70%; /* User specific */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative; /* User specific */
+    z-index: 1; /* User specific - above page background */
 }
-
 .cover-text-on-image-container p,
 .cover-text-on-image-container strong,
 .cover-text-on-image-container em,
-.cover-text-on-image-container span {
-  color: #fff;
+.cover-text-on-image-container span { color: white !important; } /* User specific */
+
+/* Page Flip and Corner Styles */
+.page.left { border-top-left-radius: 0.25rem; border-bottom-left-radius: 0.25rem; transform-origin: right center; } /* User specific */
+.page.right { border-top-right-radius: 0.25rem; border-bottom-right-radius: 0.25rem; transform-origin: left center; } /* User specific */
+.page.flipping { transition: transform 0.8s ease-in-out !important; } /* User specific */
+.page.flipped-forward { transform: rotateY(-180deg); } /* User specific */
+.page.flipped-backward { transform: rotateY(180deg); } /* User specific */
+
+.turn-corner { /* User specific interactive corners for turning pages */
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    z-index: 10;
+    opacity: 0.2;
+    transition: opacity 0.2s;
 }
+.turn-corner:hover { opacity: 0.5; }
+.turn-corner.prev { bottom: 10px; left: 10px; background: linear-gradient(135deg, transparent 50%, rgba(0,0,0,0.08) 50%); }
+.turn-corner.next { bottom: 10px; right: 10px; background: linear-gradient(225deg, transparent 50%, rgba(0,0,0,0.08) 50%); }
 
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--muted-bg);
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--text-secondary);
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  filter: brightness(1.2);
-}
-
-.page.flipping { transition: transform 0.8s ease-in-out !important; }
-.page.flipped-forward { transform: rotateY(-180deg); }
-.page.flipped-backward { transform: rotateY(180deg); }
-
+/* Book cover item on the main grid */
 .book-cover-item {
-  position: relative;
-  background-size: cover;
-  background-position: center;
-  border-radius: 0.5rem;
-  overflow: hidden;
-  cursor: pointer;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
+    border-radius: 0.5rem; /* User specific */
+    padding: 0; /* User specific */
+    text-align: center; /* User specific */
+    cursor: pointer; /* User specific */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* User specific */
+    min-height: 240px; /* User specific */
+    display: flex; /* User specific */
+    flex-direction: column; /* User specific */
+    justify-content: flex-end; /* User specific */
+    align-items: center; /* User specific */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* User specific */
+    background-size: cover; /* User specific */
+    background-position: center; /* User specific */
+    position: relative; /* User specific */
+    overflow: hidden; /* User specific */
 }
+.book-cover-item:hover { transform: translateY(-5px) scale(1.03); box-shadow: 0 10px 15px rgba(0,0,0,0.15); } /* User specific */
 
-.book-cover-item:hover {
-  transform: translateY(-5px) scale(1.03);
-  box-shadow: 0 10px 15px rgba(0,0,0,0.15);
+.book-cover-item::before { /* Gradient overlay for text readability on covers */
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(to top, var(--book-cover-overlay-start) 0%, var(--book-cover-overlay-end) 70%); /* User specific */
+    z-index: 1; /* User specific */
+    transition: background-color 0.3s ease; /* User specific */
 }
+.book-cover-item:hover::before { background-color: rgba(0,0,0,0.2); } /* User specific - darkens overlay on hover */
 
 .book-cover-title {
-  position: relative;
-  padding: 0.5rem 1rem;
-  font-family: var(--font-caldas);
-  font-size: 1.35rem;
-  font-weight: bold;
-  color: #fff;
-  text-shadow: var(--book-cover-text-shadow);
-  text-align: center;
-  z-index: 2;
+    font-weight: bold; /* User specific */
+    font-size: 1.35rem; /* User specific */
+    color: #ffffff; /* User specific */
+    word-break: break-word; /* User specific */
+    position: relative; /* User specific */
+    z-index: 2; /* User specific - above overlay */
+    padding: 0.5rem 1rem; /* User specific */
+    text-shadow: var(--book-cover-text-shadow); /* User specific */
+    font-family: var(--font-caldas); /* User specific */
+    width: 100%; /* Ensure it spans for text-align:center */
+    box-sizing: border-box;
 }
+
+.book-cover-author {
+    font-size: 0.9rem; /* User specific */
+    color: #f0f0f0; /* User specific - light color for readability on overlay */
+    margin-top: 0.25rem; /* User specific */
+    position: relative; /* User specific */
+    z-index: 2; /* User specific - above overlay */
+    padding: 0 1rem 0.75rem; /* User specific */
+    text-shadow: var(--book-cover-text-shadow); /* User specific */
+    font-family: var(--font-primary); /* User specific */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Transition clone for opening book animation */
+.book-transition-clone {
+    position: fixed; /* User specific */
+    z-index: 1000; /* User specific - very high */
+    background-color: var(--bg-card); /* User specific */
+    border-radius: 0.5rem; /* User specific */
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2); /* User specific */
+    transition: all 0.7s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* User specific - distinctive easing */
+    display: flex; /* User specific */
+    justify-content: center; /* User specific */
+    align-items: center; /* User specific */
+    overflow: hidden; /* User specific */
+    text-align: center; /* User specific */
+    padding: 1rem; /* User specific */
+}
+
+/* Action buttons on book covers (Edit/Delete) */
+.book-action-btn {
+    padding: 0.5rem; /* User specific */
+    font-size: 0.9rem; /* User specific */
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2); /* User specific */
+    /* Base colors can be Tailwind or default, themes override below */
+}
+body.caldas-mode .book-action-btn { /* Specific styling for Caldas mode from user */
+    background-color: var(--accent-color);
+    color: var(--accent-foreground);
+}
+body.caldas-mode .book-action-btn:hover { background-color: var(--accent-color-hover); }
+
+/* Ensure action buttons are above the cover's ::before overlay */
+.book-cover-container .book-action-btn { z-index: 3; }
+/* .book-cover-item { position: relative; } Already defined */
