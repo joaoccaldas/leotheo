@@ -8,7 +8,6 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
-
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body class="min-h-screen flex flex-col items-center justify-center p-4 bg-bg-primary text-text-primary font-primary transition-colors duration-500">
@@ -166,63 +165,11 @@ document.addEventListener('DOMContentLoaded', () => {
         parsed.books.push(newBook);
         localStorage.setItem('webBookAppData', JSON.stringify(parsed));
       }
-
-      // Render books in grid
-      if (window.ui && typeof window.ui.renderBooksGridUI === 'function') {
-        window.ui.renderBooksGridUI(
-          parsed.books,
-          'Lukas',
-          'normal',
-          openBook,
-          () => {},
-          () => {}
-        );
-      }
     })
     .catch(err => {
       console.error('Failed to load book:', err);
       alert('Could not load the Leotheo book.');
     });
-
-  // BOOK READER FUNCTIONALITY
-  function openBook(book) {
-    if (!book || !book.pages || book.pages.length === 0) return;
-
-    const reader = document.getElementById('book-reader');
-    const container = document.getElementById('book-reader-container');
-    const leftPage = document.getElementById('left-page').querySelector('.page-content');
-    const rightPage = document.getElementById('right-page').querySelector('.page-content');
-
-    let index = 0;
-
-    function renderPages() {
-      const page1 = book.pages[index] || { content: '' };
-      const page2 = book.pages[index + 1] || { content: '' };
-      leftPage.innerHTML = page1.content;
-      rightPage.innerHTML = page2.content;
-    }
-
-    renderPages();
-    container.classList.remove('hidden');
-
-    document.getElementById('turn-prev').onclick = () => {
-      if (index >= 2) {
-        index -= 2;
-        renderPages();
-      }
-    };
-
-    document.getElementById('turn-next').onclick = () => {
-      if (index + 2 < book.pages.length) {
-        index += 2;
-        renderPages();
-      }
-    };
-
-    document.getElementById('close-book-btn').onclick = () => {
-      container.classList.add('hidden');
-    };
-  }
 });
 </script>
 
