@@ -1,0 +1,260 @@
+/* styles.css */
+/* :root variables and body.caldas-mode variables remain the same as previous version */
+:root {
+    --font-primary: 'Inter', sans-serif;
+    --font-caldas: 'Press Start 2P', cursive;
+    --bg-primary: #f3f4f6; 
+    --bg-card: #ffffff;
+    --bg-input: #ffffff;
+    --bg-page: #ffffff;
+    --bg-reader-overlay: rgba(55, 65, 81, 0.5); 
+    --text-primary: #1f2937; 
+    --text-secondary: #4b5563; 
+    --text-accent: #4f46e5; 
+    --text-input: #1f2937;
+    --text-page: #1f2937;
+    --border-input: #d1d5db; 
+    --border-page-separator: #e0e0e0;
+    --accent-color: #4f46e5; 
+    --accent-color-hover: #4338ca; 
+    --accent-foreground: #ffffff;
+    --muted-bg: #e5e7eb; 
+    --muted-text: #374151; 
+    --muted-hover-bg: #d1d5db; 
+    --button-add-bg: var(--accent-color);
+    --button-add-text: var(--accent-foreground);
+    --button-add-hover-bg: var(--accent-color-hover);
+    --button-close-book-text: #ffffff;
+    --button-close-book-hover-text: #e5e7eb; 
+    --theme-toggle-bg: var(--muted-bg);
+    --theme-toggle-text-color: var(--muted-text);
+    --theme-toggle-focus-ring: var(--accent-color);
+    --username-font-size: 2.25rem; 
+    --change-username-font-size: 1rem; 
+    --book-cover-overlay-start: rgba(0,0,0,0.6);
+    --book-cover-overlay-end: rgba(0,0,0,0.0);
+    --book-cover-text-shadow: 0px 2px 4px rgba(0,0,0,0.8);
+    --page-title-font: var(--font-primary);
+    --modal-title-font: var(--font-primary);
+    --custom-welcome-font: var(--font-primary); 
+    --custom-welcome-font-size: 1.5rem; 
+    --custom-welcome-text-color: var(--text-secondary);
+}
+
+body.caldas-mode {
+    --font-primary: 'Inter', sans-serif; 
+    --font-caldas: 'Press Start 2P', cursive;
+    --bg-primary: #1a1a2e; 
+    --bg-card: #2a2a3e; 
+    --bg-input: #1e1e30;
+    --bg-page: #242436; 
+    --bg-reader-overlay: rgba(10, 10, 20, 0.7);
+    --text-primary: #e0e0e0; 
+    --text-secondary: #a0a0c0; 
+    --text-accent: #00ffdd; 
+    --text-input: #e0e0e0;
+    --text-page: #e0e0e0;
+    --border-input: #4a4a6e; 
+    --border-page-separator: #3a3a5e;
+    --accent-color: #00ffdd; 
+    --accent-color-hover: #00e0c0; 
+    --accent-foreground: #1a1a2e; 
+    --muted-bg: #3a3a5e; 
+    --muted-text: #c0c0e0; 
+    --muted-hover-bg: #4a4a6e;
+    --button-add-bg: #ff00ff; 
+    --button-add-text: #ffffff;
+    --button-add-hover-bg: #dd00dd;
+    --button-close-book-text: #00ffdd;
+    --button-close-book-hover-text: #ffffff;
+    --theme-toggle-bg: var(--accent-color);
+    --theme-toggle-text-color: var(--accent-foreground);
+    --theme-toggle-focus-ring: #ff00ff; 
+    --book-cover-overlay-start: rgba(255,0,255,0.4); 
+    --book-cover-overlay-end: rgba(0,255,221,0.1); 
+    --book-cover-text-shadow: 0px 0px 8px var(--accent-color);
+    --page-title-font: var(--font-caldas);
+    --modal-title-font: var(--font-caldas);
+    --custom-welcome-font: var(--font-caldas);
+    --custom-welcome-font-size: 1.25rem; 
+    --custom-welcome-text-color: var(--text-accent);
+}
+
+body { 
+    font-family: var(--font-primary);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    overscroll-behavior: none; 
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.username-display-text { font-size: var(--username-font-size); color: var(--text-accent); font-weight: 500; }
+.change-username-link { font-size: var(--change-username-font-size); color: var(--text-accent); text-decoration: underline; }
+.change-username-link:hover { filter: brightness(1.2); }
+.custom-welcome-text {
+    font-family: var(--custom-welcome-font); font-size: var(--custom-welcome-font-size);
+    color: var(--custom-welcome-text-color); font-weight: 500;
+    transition: font-family 0.3s ease, color 0.3s ease, font-size 0.3s ease;
+}
+.page-title-text { font-family: var(--page-title-font); color: var(--text-primary); transition: font-family 0.3s ease; }
+.modal-title-text { font-family: var(--modal-title-font); transition: font-family 0.3s ease; }
+
+.bg-card { background-color: var(--bg-card); }
+.text-text-primary { color: var(--text-primary); }
+.text-text-secondary { color: var(--text-secondary); }
+.input-border { border-color: var(--border-input); }
+.bg-input { background-color: var(--bg-input); }
+.text-input-text { color: var(--text-input); }
+.focus\:ring-accent:focus { --tw-ring-color: var(--accent-color); }
+.focus\:border-accent:focus { border-color: var(--accent-color); }
+.bg-accent { background-color: var(--accent-color); }
+.text-accent-foreground { color: var(--accent-foreground); }
+.hover\:bg-accent-hover:hover { background-color: var(--accent-color-hover); }
+.text-accent { color: var(--text-accent); }
+.hover\:text-accent-hover:hover { filter: brightness(1.2); }
+.bg-muted { background-color: var(--muted-bg); }
+.text-muted-foreground { color: var(--muted-text); }
+.hover\:bg-muted-hover:hover { background-color: var(--muted-hover-bg); }
+.add-book-button-style { background-color: var(--button-add-bg); color: var(--button-add-text); font-family: var(--font-caldas); }
+.add-book-button-style:hover { background-color: var(--button-add-hover-bg); }
+.close-book-button-style { color: var(--button-close-book-text); font-family: var(--font-caldas); }
+.close-book-button-style:hover { color: var(--button-close-book-hover-text); }
+.theme-text { color: var(--text-secondary); }
+.theme-toggle-button { background-color: var(--theme-toggle-bg); color: var(--theme-toggle-text-color); font-family: var(--font-primary); }
+.theme-toggle-button:focus { --tw-ring-color: var(--theme-toggle-focus-ring); }
+.modal-overlay { background-color: rgba(0, 0, 0, 0.6); } 
+.bg-reader-overlay { background-color: var(--bg-reader-overlay); }
+.page-bg { background-color: var(--bg-page); }
+.page-text { color: var(--text-page); }
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: var(--muted-bg); border-radius: 10px; }
+::-webkit-scrollbar-thumb { background: var(--text-secondary); border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { filter: brightness(1.2); }
+
+.book {
+    width: 90vw; height: 700px; max-width: 1200px; display: flex;
+    perspective: 2500px; transition: opacity 0.5s ease-in-out;
+    margin: auto; border: 1px solid var(--border-page-separator); overflow: hidden;
+}
+.page {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05); 
+    overflow-y: auto; 
+    /* Padding is applied to .page-content now, not directly to .page for full-width cover */
+    display: flex; flex-direction: column; justify-content: flex-start; align-items: center;
+    line-height: 1.7; height: 100%; 
+    transition: width 0.6s ease-in-out, opacity 0.3s ease-in-out, transform 0.6s ease-in-out;
+    flex-shrink: 0;
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+}
+.page.half-width-page { 
+    width: 50%; opacity: 1; border-right: 1px solid var(--border-page-separator); 
+    padding: 2rem; /* Add padding back for half-width content pages */
+}
+.page.left.half-width-page { border-right: 1px solid var(--border-page-separator); }
+.page.right.half-width-page { border-left: none; }
+
+.page.full-width-page { 
+    width: 100%; opacity: 1; border-right: none; 
+    background-size: cover !important;
+    background-position: center !important;
+    padding: 0; /* No padding on the page element itself for full-width cover */
+}
+/* Ensure the .page-content (cover text container) within a full-width page has padding */
+.page.full-width-page .page-content.cover-text-on-image-container {
+    margin: auto; /* Center the text box */
+}
+
+
+.page.hidden-page { width: 0; opacity: 0; padding: 0; border: none; overflow: hidden; }
+
+.page-content {
+    max-width: 100%; width: 100%; flex-grow: 1; display: flex; flex-direction: column;
+    font-size: 16px; 
+    /* Padding for normal content pages is handled by .page.half-width-page */
+    /* Padding for cover text is handled by .cover-text-on-image-container */
+}
+.page.half-width-page .page-content {
+    /* No specific padding here, inherits from .page.half-width-page's padding */
+}
+
+
+.cover-text-on-image-container {
+    background-color: rgba(0,0,0,0.55); color: white !important; 
+    padding: 1.5rem; /* Padding for the text box itself */
+    border-radius: 0.375rem; 
+    width: auto; /* Let it size to content, up to max-width */
+    max-width: 60%; /* Make the text box narrower on the cover */
+    margin: auto; /* Center it on the page */
+    text-align: center; 
+    overflow-y: auto;
+    max-height: 70%; /* Max height for the text box */
+    display: flex; flex-direction: column; justify-content: center; 
+    position: relative; /* Ensure it's above the page's background */
+    z-index: 1;
+}
+.cover-text-on-image-container p,
+.cover-text-on-image-container strong,
+.cover-text-on-image-container em,
+.cover-text-on-image-container span { color: white !important; }
+
+.page.left { border-top-left-radius: 0.25rem; border-bottom-left-radius: 0.25rem; transform-origin: right center; }
+.page.right { border-top-right-radius: 0.25rem; border-bottom-right-radius: 0.25rem; transform-origin: left center; }
+.page.flipping { transition: transform 0.8s ease-in-out !important; }
+.page.flipped-forward { transform: rotateY(-180deg); }
+.page.flipped-backward { transform: rotateY(180deg); }
+.turn-corner {
+    position: absolute; width: 50px; height: 50px; cursor: pointer; z-index: 10; opacity: 0.2; 
+    transition: opacity 0.2s;
+}
+.turn-corner:hover { opacity: 0.5; }
+.turn-corner.prev { bottom: 10px; left: 10px; background: linear-gradient(135deg, transparent 50%, rgba(0,0,0,0.08) 50%); }
+.turn-corner.next { bottom: 10px; right: 10px; background: linear-gradient(225deg, transparent 50%, rgba(0,0,0,0.08) 50%); }
+.book-cover-item {
+    border-radius: 0.5rem; padding: 0; text-align: center; cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    min-height: 240px; display: flex; flex-direction: column;
+    justify-content: flex-end; align-items: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    background-size: cover; background-position: center;
+    position: relative; overflow: hidden; 
+}
+.book-cover-item:hover { transform: translateY(-5px) scale(1.03); box-shadow: 0 10px 15px rgba(0,0,0,0.15); }
+.book-cover-item::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(to top, var(--book-cover-overlay-start) 0%, var(--book-cover-overlay-end) 70%); 
+    z-index: 1; transition: background-color 0.3s ease;
+}
+.book-cover-item:hover::before { background-color: rgba(0,0,0,0.2); }
+.book-cover-title {
+    font-weight: bold; font-size: 1.35rem; color: #ffffff;
+    word-break: break-word; position: relative; z-index: 2;
+    padding: 0.5rem 1rem; text-shadow: var(--book-cover-text-shadow);
+    font-family: var(--font-caldas); 
+}
+.book-cover-author {
+    font-size: 0.9rem; color: #f0f0f0; margin-top: 0.25rem;
+    position: relative; z-index: 2; padding: 0 1rem 0.75rem; 
+    text-shadow: var(--book-cover-text-shadow);
+    font-family: var(--font-primary); 
+}
+.book-transition-clone {
+    position: fixed; z-index: 1000; background-color: var(--bg-card);
+    border-radius: 0.5rem; box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    transition: all 0.7s cubic-bezier(0.68, -0.55, 0.27, 1.55); 
+    display: flex; justify-content: center; align-items: center;
+    overflow: hidden; text-align: center; padding: 1rem;
+}
+#page-content-inputs textarea {
+    font-family: var(--font-primary); font-size: 15px; line-height: 1.6;
+    background-color: var(--bg-input); color: var(--text-input);
+    border-color: var(--border-input);
+}
+.book-action-btn {
+    padding: 0.5rem; font-size: 0.9rem; box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+body.caldas-mode .book-action-btn { background-color: var(--accent-color); color: var(--accent-foreground); }
+body.caldas-mode .book-action-btn:hover { background-color: var(--accent-color-hover); }
+.book-cover-container .book-action-btn { z-index: 3; }
+.book-cover-item { position: relative; }
