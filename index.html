@@ -144,11 +144,8 @@ document.addEventListener('DOMContentLoaded', () => {
   fetch(BOOK_JSON_URL)
     .then(res => res.json())
     .then(data => {
-      if (!data.title || !Array.isArray(data.pages)) {
-        throw new Error('Invalid book format.');
-      }
+      if (!data.title || !Array.isArray(data.pages)) throw new Error('Invalid book format.');
 
-      // Prepare pages, inserting cover image
       const preparedPages = data.pages.map((p, i) => ({
         content: p.content || '',
         coverImageUrl: i === 0 ? COVER_IMAGE_URL : ''
@@ -158,34 +155,77 @@ document.addEventListener('DOMContentLoaded', () => {
         id: HARDCODED_BOOK_ID,
         title: data.title,
         pages: preparedPages,
-        coverColor: '#f59e0b'
+        coverColor: '#6366f1'
       };
 
       const saved = localStorage.getItem('webBookAppData');
-      let parsed = saved ? JSON.parse(saved) : null;
-      const alreadyExists = parsed?.books?.some(b => b.id === HARDCODED_BOOK_ID);
+      let parsed = saved ? JSON.parse(saved) : { books: [] };
+      const alreadyExists = parsed.books.some(b => b.id === HARDCODED_BOOK_ID);
 
       if (!alreadyExists) {
-        // If appState already loaded, push directly
-        if (window.appState) {
-          window.appState.books.push(newBook);
-          window.saveState();
-          window.refreshAppUI();
-        } else {
-          // Patch it directly in localStorage if app hasn't loaded yet
-          if (!parsed) parsed = { books: [] };
-          parsed.books.push(newBook);
-          localStorage.setItem('webBookAppData', JSON.stringify(parsed));
-        }
-        console.log('Leotheo book loaded and saved.');
+        parsed.books.push(newBook);
+        localStorage.setItem('webBookAppData', JSON.stringify(parsed));
+      }
+
+      // Render books in grid
+      if (window.ui && typeof window.ui.renderBooksGridUI === 'function') {
+        window.ui.renderBooksGridUI(
+          parsed.books,
+          'Lukas',
+          'normal',
+          openBook,
+          () => {},
+          () => {}
+        );
       }
     })
     .catch(err => {
-      console.error('Failed to load leotheo.json:', err);
+      console.error('Failed to load book:', err);
       alert('Could not load the Leotheo book.');
     });
+
+  // BOOK READER FUNCTIONALITY
+  function openBook(book) {
+    if (!book || !book.pages || book.pages.length === 0) return;
+
+    const reader = document.getElementById('book-reader');
+    const container = document.getElementById('book-reader-container');
+    const leftPage = document.getElementById('left-page').querySelector('.page-content');
+    const rightPage = document.getElementById('right-page').querySelector('.page-content');
+
+    let index = 0;
+
+    function renderPages() {
+      const page1 = book.pages[index] || { content: '' };
+      const page2 = book.pages[index + 1] || { content: '' };
+      leftPage.innerHTML = page1.content;
+      rightPage.innerHTML = page2.content;
+    }
+
+    renderPages();
+    container.classList.remove('hidden');
+
+    document.getElementById('turn-prev').onclick = () => {
+      if (index >= 2) {
+        index -= 2;
+        renderPages();
+      }
+    };
+
+    document.getElementById('turn-next').onclick = () => {
+      if (index + 2 < book.pages.length) {
+        index += 2;
+        renderPages();
+      }
+    };
+
+    document.getElementById('close-book-btn').onclick = () => {
+      container.classList.add('hidden');
+    };
+  }
 });
 </script>
+
 
   </body>
 </html>
