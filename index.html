@@ -2,177 +2,183 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Lulu's Library</title>
-
-  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
-<body class="min-h-screen flex flex-col items-center justify-center p-4 bg-bg-primary text-text-primary font-primary transition-colors duration-500">
+<body class="min-h-screen bg-bg-primary text-text-primary font-primary transition-colors duration-300 ease-in-out antialiased">
 
-  <header id="app-header" class="fixed top-0 inset-x-0 p-3 sm:p-4 z-50 flex justify-between items-center w-full">
+  <header id="app-header" class="fixed top-0 inset-x-0 p-4 flex justify-between items-center w-full z-50 bg-bg-primary/80 backdrop-blur-md shadow-sm">
     <div class="flex items-center">
-      <label for="theme-toggle-btn" class="mr-2 text-sm font-medium">Theme:</label>
-      <button id="theme-toggle-btn" aria-label="Toggle theme"
-              class="px-3 py-1.5 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 theme-toggle-button">
-        <span id="theme-toggle-icon">☀️</span>
-        <span id="theme-toggle-text">Normal</span>
+      <label for="theme-toggle-btn" class="mr-2 text-sm font-medium sr-only">Toggle Theme</label> <button id="theme-toggle-btn" title="Toggle Theme" aria-label="Toggle Theme" class="px-3 py-1.5 rounded-md bg-muted hover:bg-muted-hover text-text-secondary focus:outline-none focus:ring-2 focus:ring-accent">
+        <span id="theme-toggle-icon" class="text-lg">☀️</span>
+        <span id="theme-toggle-text" class="ml-1 text-sm">Normal</span>
       </button>
     </div>
-
-    <div id="username-display-container" class="flex items-center space-x-2 text-right hidden">
-      <span id="username-text" class="font-medium"></span>
-      <button id="change-username-btn" class="text-sm underline">Change&nbsp;Name</button>
+    <div id="username-display-container" class="flex items-center space-x-2 hidden">
+      <span id="username-text" class="text-sm font-medium"></span>
+      <button id="change-username-btn" class="text-sm text-accent hover:underline focus:outline-none focus:ring-1 focus:ring-accent rounded">Change Name</button>
     </div>
   </header>
 
-  <main id="landing-page" class="w-full max-w-5xl text-center pt-20 sm:pt-24">
-
-    <section id="username-prompt" class="mb-10 p-6 bg-card rounded-lg shadow-lg">
-      <h1 class="text-3xl font-bold mb-4">Welcome!</h1>
-      <p class="text-text-secondary mb-4">Please enter your name to personalize your experience.</p>
-      <input id="username-input" aria-label="Your name" placeholder="Your name…"
-             class="w-full max-w-md p-3 border input-border rounded-lg shadow-sm focus:ring-2 focus:ring-accent focus:border-accent bg-input text-input-text mb-4" />
-      <button id="save-username-btn"
-              class="px-6 py-3 bg-accent text-accent-foreground font-semibold rounded-lg shadow-md hover:bg-accent-hover transition focus:outline-none focus:ring-2 focus:ring-accent">
-        Save&nbsp;Name
-      </button>
+  <main id="landing-page" class="w-full max-w-6xl mx-auto pt-20 pb-16 px-4">
+    <section id="username-prompt" class="my-10 p-6 bg-card rounded-lg shadow-lg text-center">
+      <h1 class="text-3xl font-bold mb-4 text-text-primary">Welcome to Your Digital Library!</h1>
+      <p class="mb-6 text-text-secondary">Please enter your name to personalize your experience and save your books.</p>
+      <div class="max-w-sm mx-auto">
+        <label for="username-input" class="sr-only">Your Name</label>
+        <input id="username-input" type="text" placeholder="Your name…" aria-label="Your name" class="w-full p-3 border border-border-input rounded-md mb-4 shadow-sm focus:ring-2 focus:ring-accent focus:border-accent text-text-input bg-bg-input" />
+        <button id="save-username-btn" class="w-full px-6 py-3 bg-accent text-white font-semibold rounded-md shadow-md hover:bg-accent-hover focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 transition-colors">Save Name</button>
+      </div>
     </section>
 
     <section id="main-content" class="hidden">
-      <div class="flex justify-center items-center mb-1">
-        <h2 id="custom-welcome-message" class="text-2xl text-text-secondary"></h2>
-        <button id="edit-custom-welcome-btn" title="Edit welcome"
-                class="ml-2 text-lg text-accent hover:text-accent-hover hidden">✏️</button>
+      <div class="text-center mb-8">
+        <div class="inline-flex items-center group mb-1">
+          <h2 id="custom-welcome-message" class="text-2xl md:text-3xl font-semibold text-text-primary"></h2>
+          <button id="edit-custom-welcome-btn" title="Edit Welcome Message" aria-label="Edit Welcome Message" class="ml-2 text-sm text-accent opacity-0 group-hover:opacity-100 focus:opacity-100 transition-opacity hidden">✏️</button>
+        </div>
+        <div class="inline-flex items-center group">
+          <h1 id="page-main-title" class="text-3xl md:text-4xl font-bold text-text-primary"></h1>
+          <button id="edit-page-title-btn" title="Edit Library Name" aria-label="Edit Library Name" class="ml-2 text-sm text-accent opacity-0 group-hover:opacity-100 focus:opacity-100 transition-opacity hidden">✏️</button>
+        </div>
+        <p id="welcome-user-message" class="mt-2 text-lg text-text-secondary"></p>
       </div>
-      <div class="flex justify-center items-center mb-2">
-        <h1 id="page-main-title" class="text-4xl font-bold"></h1>
-        <button id="edit-page-title-btn" title="Edit library name"
-                class="ml-2 text-xl text-accent hover:text-accent-hover hidden">✏️</button>
+
+      <div id="books-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+        </div>
+      <p id="no-books-message" class="text-center text-xl text-muted py-10 hidden">
+        No books in your library yet. Click the '+' button to create your first one!
+      </p>
+
+      <div id="import-export-controls" class="my-10 py-6 border-t border-b border-border-input text-center">
+        <h3 class="text-lg font-semibold mb-3 text-text-primary">Manage Your Library</h3>
+        <p class="text-text-secondary mb-4">Functionality for importing and exporting your library will be available here.</p>
+        <button class="px-4 py-2 bg-muted text-muted-text rounded-md hover:bg-muted-hover disabled:opacity-50" disabled>Import Library (Soon)</button>
+         <button class="px-4 py-2 bg-muted text-muted-text rounded-md hover:bg-muted-hover disabled:opacity-50" disabled>Export Library (Soon)</button>
       </div>
-      <p id="welcome-user-message" class="text-xl text-text-secondary mb-8"></p>
 
-      <div id="books-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-10"></div>
-      <p id="no-books-message" class="text-text-secondary text-lg hidden">Your bookshelf is empty. Click the “+” button to create your first book!</p>
-
-      <div id="import-export-controls" class="flex justify-center items-center gap-4 mb-16">
-          </div>
-
-
-      <button id="add-book-btn" title="Create new book"
-              class="fixed bottom-8 right-8 w-16 h-16 bg-accent text-accent-foreground rounded-full shadow-xl hover:bg-accent-hover focus:outline-none focus:ring-2 focus:ring-accent focus:ring-opacity-75 flex items-center justify-center text-3xl transition transform hover:scale-110">
+      <button id="add-book-btn" title="Add New Book" aria-label="Add New Book"
+              class="fixed bottom-6 right-6 w-14 h-14 bg-accent text-white text-3xl rounded-full shadow-lg hover:bg-accent-hover hover:scale-110 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 transition-all transform flex items-center justify-center">
         +
       </button>
     </section>
   </main>
 
-  <div id="book-creation-modal" class="fixed inset-0 modal-overlay items-center justify-center p-4 hidden z-[60]">
-    <div class="bg-card p-6 sm:p-8 rounded-lg shadow-2xl w-full max-w-lg modal-content max-h-[90vh] overflow-y-auto text-text-primary flex flex-col">
+  <div id="book-creation-modal" class="fixed inset-0 bg-black bg-opacity-60 hidden items-center justify-center z-[70] p-4 backdrop-blur-sm" role="dialog" aria-modal="true" aria-labelledby="book-creation-modal-title">
+    <div class="bg-card p-6 rounded-lg shadow-xl w-full max-w-lg max-h-[90vh] overflow-y-auto text-text-primary">
       <div id="modal-step-1">
-        <h2 class="text-2xl font-bold mb-6 text-center modal-title-font">Create New Book</h2>
-        <div id="json-uploader-container" class="mb-4"></div>
+        <h2 id="book-creation-modal-title" class="text-2xl font-bold mb-6">Create New Book</h2>
         <div class="mb-4">
           <label for="book-title-input" class="block text-sm font-medium text-text-secondary mb-1">Book Title</label>
-          <input type="text" id="book-title-input" placeholder="Enter book title"
-                 class="w-full p-3 border rounded-lg shadow-sm focus:ring-2 focus:border-accent bg-input text-input-text input-border">
+          <input id="book-title-input" type="text" class="w-full p-2 border border-border-input rounded-md shadow-sm focus:ring-accent focus:border-accent bg-bg-input text-text-input" />
+        </div>
+        <div id="cover-image-input-container" class="mb-4"> <label for="cover-image-url-input" class="block text-sm font-medium text-text-secondary mb-1">Cover Image URL (Optional)</label>
+          <input id="cover-image-url-input" type="url" placeholder="https://example.com/image.jpg" class="w-full p-2 border border-border-input rounded-md shadow-sm focus:ring-accent focus:border-accent bg-bg-input text-text-input" />
         </div>
         <div class="mb-6">
           <label for="num-pages-input" class="block text-sm font-medium text-text-secondary mb-1">Number of Pages (including cover)</label>
-          <input type="number" id="num-pages-input" value="1" min="1" placeholder="e.g., 10"
-                 class="w-full p-3 border rounded-lg shadow-sm focus:ring-2 focus:border-accent bg-input text-input-text input-border">
+          <input id="num-pages-input" type="number" min="1" value="1" class="w-full p-2 border border-border-input rounded-md shadow-sm focus:ring-accent focus:border-accent bg-bg-input text-text-input" />
         </div>
         <div class="flex justify-end space-x-3">
-          <button id="cancel-creation-btn"
-                  class="px-4 py-2 bg-muted text-muted-foreground font-medium rounded-lg hover:bg-muted-hover transition">Cancel</button>
-          <button id="next-step-btn"
-                  class="px-4 py-2 bg-accent text-accent-foreground font-medium rounded-lg hover:bg-accent-hover transition">Next</button>
+          <button id="cancel-creation-btn" class="px-4 py-2 bg-muted text-muted-text rounded-md hover:bg-muted-hover focus:outline-none focus:ring-2 focus:ring-gray-400">Cancel</button>
+          <button id="next-step-btn" class="px-4 py-2 bg-accent text-white font-semibold rounded-md hover:bg-accent-hover focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2">Next: Edit Pages</button>
         </div>
       </div>
 
       <div id="modal-step-2" class="hidden">
-        <h2 id="current-page-editor-label" class="text-xl font-bold mb-2 text-center modal-title-font">Editing Page X</h2>
-        <p id="page-editor-indicator" class="text-sm text-text-secondary text-center mb-4">Page X of Y</p>
-        
-        <div id="page-content-inputs-wrapper" class="mb-4 flex-grow flex flex-col min-h-[200px]">
-            <div id="cover-image-input-container-template" class="mb-4 hidden">
-                <label for="cover-image-url-input-template" class="block text-sm font-medium text-text-secondary mb-1">Cover Image URL (Optional)</label>
-                <input type="url" id="cover-image-url-input-template" placeholder="https://example.com/image.png"
-                       class="w-full p-3 border rounded-lg shadow-sm focus:ring-2 focus:border-accent bg-input text-input-text input-border">
-            </div>
-            <div id="page-content-inputs" class="flex-grow flex flex-col"></div>
+        <h2 id="current-page-editor-label" class="text-2xl font-bold mb-2">Editing Page...</h2>
+        <p id="page-editor-indicator" class="mb-4 text-sm text-muted-text">Page X of Y</p>
+        <div id="page-content-inputs" class="mb-4"></div>
+        <div class="flex justify-between items-center mt-6 mb-4">
+          <button id="prev-page-editor-btn" class="px-4 py-2 bg-muted text-muted-text rounded-md hover:bg-muted-hover focus:outline-none focus:ring-2 focus:ring-gray-400 disabled:opacity-50" disabled>&leftarrow; Previous Page</button>
+          <button id="next-page-editor-btn" class="px-4 py-2 bg-muted text-muted-text rounded-md hover:bg-muted-hover focus:outline-none focus:ring-2 focus:ring-gray-400 disabled:opacity-50" disabled>Next Page &rightarrow;</button>
         </div>
-
-        <div class="flex justify-between items-center mt-auto pt-4 border-t input-border">
-            <button id="delete-page-btn-modal" class="px-4 py-2 bg-red-600 text-white font-medium rounded-lg hover:bg-red-700 transition mr-auto hidden">Delete Page</button>
-            <button id="prev-page-editor-btn" class="px-4 py-2 bg-muted text-muted-foreground font-medium rounded-lg hover:bg-muted-hover transition">&lt;&nbsp;Prev</button>
-            <div class="flex items-center space-x-3">
-                <button id="back-to-step1-btn" class="px-4 py-2 bg-muted text-muted-foreground font-medium rounded-lg hover:bg-muted-hover transition">Back</button>
-                <button id="save-book-btn" class="px-4 py-2 bg-accent text-accent-foreground font-medium rounded-lg hover:bg-accent-hover transition">Save Book</button>
-            </div>
-            <button id="next-page-editor-btn" class="px-4 py-2 bg-muted text-muted-foreground font-medium rounded-lg hover:bg-muted-hover transition">Next&nbsp;&gt;</button>
+        <div class="flex justify-between items-center mt-4 pt-4 border-t border-border-input">
+          <button id="back-to-step1-btn" class="px-4 py-2 bg-muted text-muted-text rounded-md hover:bg-muted-hover focus:outline-none focus:ring-2 focus:ring-gray-400">Back to Details</button>
+          <button id="save-book-btn" class="px-6 py-2 bg-accent text-white font-semibold rounded-md hover:bg-accent-hover focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2">Save Book</button>
         </div>
       </div>
     </div>
   </div>
 
-  <div id="book-reader-container" class="fixed inset-0 bg-reader-overlay items-center justify-center hidden z-[70] backdrop-blur-sm">
-    <div id="book-reader" class="book hidden items-center justify-center relative">
-      <div id="left-page" class="page left relative page-bg page-text">
-        <div class="page-content prose lg:prose-xl max-w-none"></div>
-        <div id="turn-prev" class="turn-corner prev" aria-label="Previous page"></div>
+  <div id="book-reader-container" class="fixed inset-0 bg-reader-overlay hidden items-center justify-center z-[60] backdrop-blur-sm" aria-hidden="true">
+    <div id="book-reader" class="book hidden items-center justify-center relative shadow-2xl rounded-lg" role="document" aria-roledescription="book reader">
+      <div id="left-page" class="page left bg-bg-page overflow-hidden">
+        <div class="page-content p-4 md:p-6 prose dark:prose-invert max-w-none overflow-y-auto h-full">
+          </div>
+        <button id="turn-prev" title="Previous Page" aria-label="Previous Page" class="absolute left-0 top-1/2 -translate-y-1/2 w-12 h-24 bg-black/10 hover:bg-black/20 text-white/50 hover:text-white text-3xl flex items-center justify-center opacity-50 hover:opacity-100 transition-opacity focus:opacity-100 focus:outline-none focus:ring-1 focus:ring-white/50 rounded-r-md">‹</button>
       </div>
-      <div id="right-page" class="page right relative page-bg page-text">
-        <div class="page-content prose lg:prose-xl max-w-none"></div>
-        <div id="turn-next" class="turn-corner next" aria-label="Next page"></div>
+      <div id="right-page" class="page right bg-bg-page overflow-hidden">
+        <div class="page-content p-4 md:p-6 prose dark:prose-invert max-w-none overflow-y-auto h-full">
+          </div>
+        <button id="turn-next" title="Next Page" aria-label="Next Page" class="absolute right-0 top-1/2 -translate-y-1/2 w-12 h-24 bg-black/10 hover:bg-black/20 text-white/50 hover:text-white text-3xl flex items-center justify-center opacity-50 hover:opacity-100 transition-opacity focus:opacity-100 focus:outline-none focus:ring-1 focus:ring-white/50 rounded-l-md">›</button>
       </div>
     </div>
-    <button id="close-book-btn" aria-label="Close reader"
-            class="absolute top-4 right-4 text-white text-3xl font-bold hover:text-gray-300 close-book-button-style">&times;</button>
+    <button id="close-book-btn" title="Close Book Reader" aria-label="Close Book Reader" class="absolute top-4 right-4 text-3xl text-white hover:text-gray-200 focus:outline-none focus:ring-2 focus:ring-white/80 rounded-full w-10 h-10 flex items-center justify-center bg-black/30 hover:bg-black/50 transition-colors">&times;</button>
   </div>
 
   <script src="ui.js" defer></script>
   <script src="importexport.js" defer></script> <script src="script.js" defer></script>
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  const HARDCODED_BOOK_ID = 'book-leotheo';
-  const BOOK_JSON_URL = 'https://raw.githubusercontent.com/joaoccaldas/leotheo/main/leotheo.json';
-  const COVER_IMAGE_URL = 'https://raw.githubusercontent.com/joaoccaldas/leotheo/main/leotheo.jpg';
 
-  fetch(BOOK_JSON_URL)
-    .then(res => res.json())
-    .then(data => {
-      if (!data.title || !Array.isArray(data.pages)) throw new Error('Invalid book format.');
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const HARDCODED_BOOK_ID = 'book-leotheo'; // Unique ID for this specific book
+      const BOOK_JSON_URL = 'leotheo.json'; // Using local copy for simplicity if it's uploaded with the project
+      // const BOOK_JSON_URL = 'https://raw.githubusercontent.com/joaoccaldas/leotheo/main/leotheo.json'; // Remote URL
+      const COVER_IMAGE_URL = 'https://raw.githubusercontent.com/joaoccaldas/leotheo/main/leotheo.jpg'; // Example cover
 
-      const preparedPages = data.pages.map((p, i) => ({
-        content: p.content || '',
-        coverImageUrl: i === 0 ? COVER_IMAGE_URL : ''
-      }));
+      // Check if the book already exists to avoid duplicates on every load
+      const existingAppData = localStorage.getItem('webBookAppData');
+      const appData = existingAppData ? JSON.parse(existingAppData) : { books: [] };
+      const bookAlreadyExists = appData.books.some(book => book.id === HARDCODED_BOOK_ID);
 
-      const newBook = {
-        id: HARDCODED_BOOK_ID,
-        title: data.title,
-        pages: preparedPages,
-        coverColor: '#6366f1'
-      };
+      if (!bookAlreadyExists) {
+        fetch(BOOK_JSON_URL)
+          .then(response => {
+            if (!response.ok) {
+              throw new Error(`Network response was not ok for ${BOOK_JSON_URL}: ${response.statusText}`);
+            }
+            return response.json();
+          })
+          .then(data => {
+            if (!data.title || !Array.isArray(data.pages)) {
+                console.error('Fetched hardcoded book JSON is invalid:', data);
+                return;
+            }
+            // Prepare pages according to app structure (page 0 is cover)
+            const preparedPages = data.pages.map((pageData, index) => ({
+              content: pageData.content || '',
+              // Assign the hardcoded cover image URL to the first page (index 0)
+              coverImageUrl: index === 0 ? COVER_IMAGE_URL : ''
+            }));
 
-      const saved = localStorage.getItem('webBookAppData');
-      let parsed = saved ? JSON.parse(saved) : { books: [] };
-      const alreadyExists = parsed.books.some(b => b.id === HARDCODED_BOOK_ID);
+            const newBook = {
+              id: HARDCODED_BOOK_ID,
+              title: data.title,
+              pages: preparedPages,
+              coverColor: '#6366f1' // Example fallback color
+            };
 
-      if (!alreadyExists) {
-        parsed.books.push(newBook);
-        localStorage.setItem('webBookAppData', JSON.stringify(parsed));
+            appData.books.push(newBook);
+            localStorage.setItem('webBookAppData', JSON.stringify(appData));
+            console.log(`Hardcoded book "${newBook.title}" added to library.`);
+
+            // If the app is already running, try to refresh its UI
+            if (window.refreshAppUI) {
+              window.refreshAppUI();
+            }
+          })
+          .catch(error => {
+            console.error('Failed to load or process hardcoded book:', error);
+          });
+      } else {
+        console.log(`Hardcoded book "${HARDCODED_BOOK_ID}" already exists in library.`);
       }
-    })
-    .catch(err => {
-      console.error('Failed to load book:', err);
-      alert('Could not load the Leotheo book.');
     });
-});
-</script>
-
-
-  </body>
+  </script>
+</body>
 </html>
